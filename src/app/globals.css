@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-ivory: #FAF9F5;
+    --bg-surface: #F5F3EF;
+    --bg-card: #FFFFFF;
+    --text-charcoal: #1C1917;
+    --text-muted: #57534E;
+    --border-subtle: #E7E5E4;
+    --border-focus: #631322;
+    --brand-burgundy: #631322;
+    --brand-burgundy-hover: #4E0E1A;
+    --brand-burgundy-light: #F7EAEF;
+    --brand-gold: #C5A059;
+    --brand-gold-light: #FBF7EE;
+    --brand-emerald: #134e3b;
+    --success: #15803D;
+    --warning: #B45309;
+    --error: #B91C1C;
+  }
+
+  body {
+    background-color: var(--bg-ivory);
+    color: var(--text-charcoal);
+    font-family: var(--font-inter), var(--font-hind-siliguri), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Utilities for Luxury Bangladeshi Fashion Aesthetics */
+.font-bengali {
+  font-family: var(--font-hind-siliguri), system-ui, sans-serif;
+}
+
+.font-english {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Custom scrollbar for mobile drawers & tables */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F3EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #D6D3D1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A8A29E;
+}
+
+/* Luxury Card & Button Micro-interactions */
+.luxury-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -10px rgba(99, 19, 34, 0.12);
+}
+
+.btn-burgundy {
+  background-color: #631322;
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+.btn-burgundy:hover {
+  background-color: #4E0E1A;
+}
+
+.btn-outline-burgundy {
+  border: 1.5px solid #631322;
+  color: #631322;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+.btn-outline-burgundy:hover {
+  background-color: #631322;
+  color: #FFFFFF;
+}
+
+/* Badge luxury accents */
+.badge-gold {
+  background: linear-gradient(135deg, #F9F5EB 0%, #FAF0D7 100%);
+  color: #8C6D1F;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.badge-burgundy {
+  background-color: #F7EAEF;
+  color: #631322;
+  border: 1px solid rgba(99, 19, 34, 0.2);
+}

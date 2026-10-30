@@ -1,0 +1,60 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getAuthenticatedAdmin } from '@/lib/auth';
+import { execute, withTransaction } from '@/lib/db';
+
+export async function POST(req: NextRequest) {
+  try {
+    const admin = await getAuthenticatedAdmin();
+    if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+    const {
+      storeName,
+      taglineEn,
+      taglineBn,
+      phone,
+      email,
+      addressEn,
+      addressBn,
+      facebookUrl,
+      instagramUrl,
+    } = await req.json();
+
+    await withTransaction(async (tx) => {
+      await tx.execute(
+        `UPDATE store_settings 
+         SET store_name = ?,
+             tagline_en = ?,
+             tagline_bn = ?,
+             phone = ?,
+             email = ?,
+             address_en = ?,
+             address_bn = ?,
+             facebook_url = ?,
+             instagram_url = ?,
+             updated_at = CURRENT_TIMESTAMP
+         WHERE id = 1`,
+        [
+          storeName,
+          taglineEn,
+          taglineBn,
+          phone,
+          email,
+          addressEn,
+          addressBn,
+          facebookUrl || null,
+          instagramUrl || null,
+        ]
+      );
+
+      await tx.execute(
+        `INSERT INTO admin_audit_logs (admin_user_id, admin_name, action, target_type, target_id, details)
+         VALUES (?, ?, 'update_settings', 'store', '1', 'Updated store profile details')`,
+        [admin.userId, admin.name]
+      );
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
